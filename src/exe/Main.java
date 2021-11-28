@@ -1,5 +1,11 @@
 package exe;
 
+import java.util.Comparator;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import components.Account;
 import components.Client;
 import components.CurrentAccount;
@@ -11,11 +17,17 @@ public class Main {
 		
 		int clientNumbers = 3;
 
+		System.out.println("The clients ------------------------------------");
 		Client[] clients = createClientArray(clientNumbers);
 		displayClients(clients);
 		
+		System.out.println("The accounts ------------------------------------");
 		Account[] accounts = createAccountArray(clients, clientNumbers*2);
 		displayAccounts(accounts);
+		
+		System.out.println("The hashtable ------------------------------------");
+		Hashtable<Integer, Account> hAccounts = createHashtable(accounts);
+		displayHashtable(hAccounts);
 		
 	}
 	
@@ -55,5 +67,27 @@ public class Main {
 		for (Account a : accounts) {
 			System.out.println(a.toString());
 		}
+	}
+	
+	static Hashtable<Integer,Account> createHashtable(Account[] accounts) {
+		Hashtable<Integer, Account> hAccounts = new Hashtable<Integer, Account>();
+		
+		for (Account a : accounts) {
+			hAccounts.put(a.getAccountNumber(), a);
+		}
+		
+		return hAccounts;
+	}
+	
+	static void displayHashtable (Hashtable<Integer,Account> hAccounts) {
+		
+		for (Map.Entry<Integer, Account> entry : hAccounts.entrySet()) {
+
+		    System.out.println (entry.toString());
+		}
+               
+		
+		
+		
 	}
 }
