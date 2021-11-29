@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<accounts>
+    <account>
+        <label>Current</label>
+        <client-number>3</client-number>
+    </account>
+    <account>
+        <label>Savings</label>
+        <client-number>3</client-number>
+    </account>
+</accounts>

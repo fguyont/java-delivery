@@ -1,5 +1,8 @@
+ // 1.3.2 Creation of the flow class
+
 package components;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,16 +16,20 @@ public abstract class Flow {
 	private Date dateOfFlow;
 	private static int lastFlowIdentifier = 1;
 	
-	public Flow(String comment, double amount, int targetAccountNumber, boolean effect,
-			Date dateOfFlow) {
+	public Flow(String comment, double amount, int targetAccountNumber) {
 		super();
 		this.comment = comment;
 		this.identifier = lastFlowIdentifier;
 		lastFlowIdentifier++;
 		this.amount = amount;
 		this.targetAccountNumber = targetAccountNumber;
-		this.effect = effect;
-		this.dateOfFlow = dateOfFlow;
+		this.effect = false;
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, 2);
+
+		Date date = calendar.getTime();
+		this.dateOfFlow = date;
 	}
 	public String getComment() {
 		return comment;

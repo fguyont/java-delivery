@@ -14,6 +14,7 @@ public abstract class Account {
 	public Account(String label, Client client) {
 		super();
 		this.label = label;
+		this.balance = 0.0;
 		this.accountNumber = lastAccountNumber;
 		lastAccountNumber++;
 		this.client = client;
@@ -27,8 +28,21 @@ public abstract class Account {
 	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
+	public void setBalance(Flow flow) {
+		if (flow.getClass() == Credit.class) {
+			balance += flow.getAmount();
+		}
+		if (flow.getClass() == Debit.class) {
+			balance -= flow.getAmount();
+		}
+		if (flow.getClass() == Transfer.class) {
+			if (accountNumber == flow.getTargetAccountNumber()) {
+				balance+= flow.getAmount();
+			}
+			if (accountNumber == ((Transfer)flow).getIssuingAccountNumber()) {
+				balance -= flow.getAmount();
+			}
+		}
 	}
 	public int getAccountNumber() {
 		return accountNumber;
